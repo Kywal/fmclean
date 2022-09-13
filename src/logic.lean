@@ -79,8 +79,10 @@ begin
   intro hp,
   cases np_ou_q with hnp hq,
 
+  -- caso ¬P: 
   contradiction,
 
+  -- caso Q:
   exact hq,
 end
 
@@ -90,9 +92,10 @@ begin
   intro p_ou_q,
   intro np,
   cases p_ou_q with hp hq,
-
+  -- caso P:
   contradiction,
 
+  -- caso Q:
   exact hq,
 end
 
@@ -114,13 +117,24 @@ end
 theorem impl_as_contrapositive_converse :
   (¬Q → ¬P) → (P → Q)  :=
 begin
-  sorry,
+  intro nq_implies_np,
+  intro hp,
+  by_contradiction nq,
+  have np : ¬P := nq_implies_np nq,
+  contradiction, 
 end
 
 theorem contrapositive_law :
   (P → Q) ↔ (¬Q → ¬P)  :=
 begin
-  sorry,
+  split,
+
+  -- parte (P → Q) → ¬Q → ¬P:
+  exact impl_as_contrapositive P Q,
+
+  -- parte (¬Q → ¬P) → P → Q:
+  exact impl_as_contrapositive_converse P Q,
+
 end
 
 
@@ -131,9 +145,14 @@ end
 theorem lem_irrefutable :
   ¬¬(P∨¬P)  :=
 begin
-  sorry,
+  intro nn_p_ou_np,
+  apply nn_p_ou_np,
+  right,
+  intro hp,
+  apply nn_p_ou_np,
+  left,
+  exact hp,
 end
-
 
 ------------------------------------------------
 -- A lei de Peirce
@@ -142,9 +161,13 @@ end
 theorem peirce_law_weak :
   ((P → Q) → P) → ¬¬P  :=
 begin
-  sorry,
+  intro hi,
+  intro np,
+  apply np,
+  apply hi,
+  intro hp,
+  contradiction,
 end
-
 
 ------------------------------------------------
 -- Proposições de interdefinabilidade dos ∨,∧:
@@ -153,13 +176,31 @@ end
 theorem disj_as_negconj :
   P∨Q → ¬(¬P∧¬Q)  :=
 begin
-  sorry,
+  intro p_ou_q,
+  intro n_np_e_nq,
+  cases n_np_e_nq with np nq,
+  cases p_ou_q with hp hq,
+
+  -- caso P:
+  contradiction,
+
+  -- caso Q:
+  contradiction,
 end
 
 theorem conj_as_negdisj :
   P∧Q → ¬(¬P∨¬Q)  :=
 begin
-  sorry,
+  intro p_e_q,
+  cases p_e_q with hp hq,
+  intro np_ou_nq,
+  cases np_ou_nq with np nq,
+
+  -- caso ¬P:
+  contradiction,
+
+  -- caso ¬Q:
+  contradiction,
 end
 
 
