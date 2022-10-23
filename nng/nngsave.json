@@ -54,19 +54,22 @@
     },
     {
       "lean": "lemma zero_mul (m : mynat) : 0 * m = 0 :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "induction m with n ip,\r\nrw mul_zero 0,\r\nrefl,\r\n\r\nrw mul_succ 0,\r\nrw ip,\r\nrw add_zero 0,\r\nrefl,"
     },
     {
       "lean": "lemma mul_one (m : mynat) : m * 1 = m :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "rw one_eq_succ_zero,\r\nrw mul_succ m,\r\nrw mul_zero m,\r\nrw zero_add m,\r\nrefl,"
     },
     {
       "lean": "lemma one_mul (m : mynat) : 1 * m = m :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "induction m with n bc,\r\nrw mul_zero 1,\r\nrefl,\r\n\r\nrw mul_succ 1,\r\nrw bc,\r\nrw succ_eq_add_one,\r\nrefl,"
     },
     {
       "lean": "lemma mul_add (t a b : mynat) : t * (a + b) = t * a + t * b :=\n",
-      "editorText": "sorry"
+      "editorText": "induction t with u bc,\r\n\r\n-- caso base\r\nrw zero_mul (a+b),\r\nrw zero_mul a,\r\nrw zero_mul b,\r\nrw zero_add 0,\r\nrefl,\r\n\r\n-- passo indutivo\r\n"
     },
     {
       "lean": "lemma mul_assoc (a b c : mynat) : (a * b) * c = a * (b * c) :=\n",
