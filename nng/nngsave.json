@@ -89,11 +89,13 @@
     },
     {
       "lean": "lemma mul_comm (a b : mynat) : a * b = b * a :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "induction a with c bc,\r\n  -- caso base\r\n  rw zero_mul,\r\n  rw mul_zero,\r\n  refl,\r\n\r\n  -- passo indutivo\r\n  rw succ_mul c b,\r\n  rw mul_succ b c,\r\n  induction b with d bc2,\r\n  \r\n  repeat {rw add_zero},\r\n  rw bc,\r\n  refl,\r\n  \r\n  rw mul_succ c d,\r\n  rw add_assoc (c*d) c,\r\n  rw add_succ c d,\r\n  rw ← bc,\r\n  rw mul_succ c d,\r\n  rw add_assoc (c*d) c,\r\n  rw add_succ c d,\r\n  refl,  "
     },
     {
       "lean": "lemma mul_left_comm (a b c : mynat) : a * (b * c) = b * (a * c) :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "induction a with d bc,\r\n  -- caso base\r\n  repeat {rw zero_mul},\r\n  rw mul_zero,\r\n  refl,\r\n\r\n  -- passo indutivo\r\n  rw succ_mul d (b*c),\r\n  rw bc,\r\n  rw succ_mul d c,\r\n  rw mul_comm b (d*c + c),\r\n  rw add_mul (d*c) c b,\r\n  rw mul_comm (d*c) b,\r\n  rw mul_comm c b,\r\n  refl, "
     },
     {
       "lean": "lemma zero_pow_zero : (0 : mynat) ^ (0 : mynat) = 1 :=\n",
