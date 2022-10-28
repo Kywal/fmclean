@@ -99,23 +99,28 @@
     },
     {
       "lean": "lemma zero_pow_zero : (0 : mynat) ^ (0 : mynat) = 1 :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "rw pow_zero 0,\r\nrefl,"
     },
     {
       "lean": "lemma zero_pow_succ (m : mynat) : (0 : mynat) ^ (succ m) = 0 :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "rw pow_succ 0,\r\nrw mul_zero (0^m),\r\nrefl,"
     },
     {
       "lean": "lemma pow_one (a : mynat) : a ^ (1 : mynat) = a :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "rw one_eq_succ_zero,\r\nrw pow_succ a 0,\r\nrw pow_zero a,\r\nrw one_mul a,\r\nrefl,"
     },
     {
       "lean": "lemma one_pow (m : mynat) : (1 : mynat) ^ m = 1 :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "induction m with n bc,\r\n  -- caso base\r\n  rw pow_zero,\r\n  refl,\r\n\r\n  -- passo indutivo\r\n  rw pow_succ 1 n,\r\n  rw mul_one,\r\n  rw bc,\r\n  refl,"
     },
     {
       "lean": "lemma pow_add (a m n : mynat) : a ^ (m + n) = a ^ m * a ^ n :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "induction m with p bc,\r\n  -- caso base,\r\n  rw zero_add n,\r\n  rw pow_zero a,\r\n  rw one_mul,\r\n  refl,\r\n\r\n  -- passo indutivo\r\n  rw succ_add p n,\r\n  rw pow_succ,\r\n  rw bc,\r\n  rw pow_succ a p,\r\n  rw mul_assoc (a^p) a,\r\n  rw mul_comm a (a^n),\r\n  rw ← mul_assoc (a^p) (a ^ n) a,\r\n  refl,"
     },
     {
       "lean": "lemma mul_pow (a b n : mynat) : (a * b) ^ n = a ^ n * b ^ n :=\n",
