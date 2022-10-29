@@ -279,27 +279,32 @@
     },
     {
       "lean": "theorem succ_inj' {a b : mynat} (hs : succ(a) = succ(b)) :  a = b := \n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "have a_equal_b: a = b := succ_inj hs,\r\nexact a_equal_b,"
     },
     {
       "lean": "theorem succ_succ_inj {a b : mynat} (h : succ(succ(a)) = succ(succ(b))) :  a = b := \n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "have a_succ_equal_b : succ a = succ b := succ_inj h,\r\nhave a_equal_b: a = b := succ_inj a_succ_equal_b,\r\nexact a_equal_b,"
     },
     {
       "lean": "theorem succ_eq_succ_of_eq {a b : mynat} : a = b → succ(a) = succ(b) :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intro ab,\r\nrw ab,\r\nrefl,"
     },
     {
       "lean": "theorem succ_eq_succ_iff (a b : mynat) : succ a = succ b ↔ a = b :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "split,\r\n  -- indo\r\n  exact succ_inj,\r\n  -- voltando\r\n  exact succ_eq_succ_of_eq,"
     },
     {
       "lean": "theorem add_right_cancel (a t b : mynat) : a + t = b + t → a = b :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intro h,\r\ninduction t with u bc,\r\n  -- caso base\r\n  repeat {rw add_zero at h},\r\n  exact h,\r\n\r\n  -- passo indutivo\r\n  repeat {rw add_succ at h},\r\n  have j : a+u = b+u := succ_inj h,\r\n  apply bc,\r\n  exact j,"
     },
     {
       "lean": "theorem add_left_cancel (t a b : mynat) : t + a = t + b → a = b :=\n",
-      "editorText": "sorry"
+      "editorText": "rw add_comm t a,\r\nrw add_comm t b,\r\nexact add_right_cancel a t b,\r\n"
     },
     {
       "lean": "theorem add_right_cancel_iff (t a b : mynat) :  a + t = b + t ↔ a = b :=\n",
