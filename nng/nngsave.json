@@ -244,31 +244,38 @@
     },
     {
       "lean": "lemma iff_trans (P Q R : Prop) : (P ↔ Q) → (Q ↔ R) → (P ↔ R) :=\n",
-      "editorText": "sorry,"
+      "isSolved": true,
+      "editorText": "intro p_equiv_q,\r\nintro q_equiv_r,\r\nrw p_equiv_q,\r\nexact q_equiv_r,"
     },
     {
       "lean": "lemma iff_trans (P Q R : Prop) : (P ↔ Q) → (Q ↔ R) → (P ↔ R) :=\n",
-      "editorText": "sorry,"
+      "isSolved": true,
+      "editorText": "intro p_equiv_q,\r\nintro q_equiv_r,\r\nrw p_equiv_q,\r\nexact q_equiv_r,"
     },
     {
       "lean": "example (P Q : Prop) : Q → (P ∨ Q) :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intro q,\r\nright,\r\nexact q,"
     },
     {
       "lean": "lemma or_symm (P Q : Prop) : P ∨ Q → Q ∨ P :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intro h,\r\ncases h with p q,\r\n  -- caso p\r\n  right,\r\n  exact p,\r\n\r\n  -- caso q\r\n  left,\r\n  exact q,"
     },
     {
       "lean": "lemma and_or_distrib_left (P Q R : Prop) : P ∧ (Q ∨ R) ↔ (P ∧ Q) ∨ (P ∧ R) :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "split,\r\n-- indo\r\n  intro h,\r\n  cases h with p qOUr, -- extract\r\n  cases qOUr with q r,\r\n    -- caso q\r\n    left,\r\n    split, \r\n      -- parte p\r\n      exact p,\r\n      -- parte q\r\n      exact q,\r\n\r\n    -- caso r\r\n    right,\r\n    split,\r\n      -- parte p\r\n      exact p,\r\n      -- parte r\r\n      exact r,\r\n\r\n-- voltando\r\nintro h,\r\ncases h with pEq pEr,\r\n  -- caso pEq\r\n  split,\r\n    -- parte p\r\n    cases pEq with p q,\r\n    exact p,\r\n    -- parte q,\r\n    cases pEq with p q,\r\n    left,\r\n    exact q,\r\n  \r\n  -- caso pEr\r\n  cases pEr with p r,\r\n  split,\r\n    -- parte p\r\n    exact p,\r\n    -- parte r\r\n    right,\r\n    exact r,\r\n  "
     },
     {
       "lean": "lemma contra (P Q : Prop) : (P ∧ ¬ P) → Q :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intro h,\r\ncases h with p np,\r\ncontradiction,"
     },
     {
       "lean": "lemma contrapositive2 (P Q : Prop) : (¬ Q → ¬ P) → (P → Q) :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "by_cases p: P; by_cases q : Q,\r\n  -- TT\r\n  intro h,\r\n  intro p,\r\n  exact q,\r\n\r\n  -- TF\r\n  intro h,\r\n  intro p,\r\n  have np : ¬P := h q,\r\n  contradiction,\r\n\r\n  -- FT\r\n  intro h,\r\n  intro p,\r\n  exact q,\r\n\r\n  -- FF\r\n  intro h,\r\n  intro p,\r\n  contradiction,"
     },
     {
       "lean": "theorem succ_inj' {a b : mynat} (hs : succ(a) = succ(b)) :  a = b := \n",
