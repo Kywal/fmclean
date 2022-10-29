@@ -155,7 +155,7 @@
     {
       "lean": "example (P Q R S T U: Type)\n(p : P)\n(h : P → Q)\n(i : Q → R)\n(j : Q → T)\n(k : S → T)\n(l : T → U)\n: U :=\n",
       "isSolved": true,
-      "editorText": "apply l,\r\napply j,\r\napply h,\r\nexact p,"
+      "editorText": "have q:= h p,\r\nhave r:= i q,\r\nhave t:= j q,\r\nhave u:= l t,\r\nexact u,"
     },
     {
       "lean": "example (P Q : Type) : P → (Q → P) :=\n",
@@ -200,7 +200,7 @@
     {
       "lean": "lemma maze (P Q R S T U: Prop)\n(p : P)\n(h : P → Q)\n(i : Q → R)\n(j : Q → T)\n(k : S → T)\n(l : T → U)\n: U :=\n",
       "isSolved": true,
-      "editorText": "apply l,\r\napply j,\r\napply h,\r\nexact p,"
+      "editorText": "have q : Q := h p,\r\nhave t : T := j q,\r\nhave u : U := l t,\r\nexact u,"
     },
     {
       "lean": "example (P Q : Prop) : P → (Q → P) :=\n",
@@ -229,23 +229,26 @@
     },
     {
       "lean": "example (P Q : Prop) (p : P) (q : Q) : P ∧ Q :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "split,\r\n  -- parte p\r\n  exact p,\r\n\r\n  -- parte q\r\n  exact q,"
     },
     {
       "lean": "lemma and_symm (P Q : Prop) : P ∧ Q → Q ∧ P :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intro pEq,\r\ncases pEq with p q,\r\nsplit,\r\n  -- parte q\r\n  exact q,\r\n\r\n  -- parte p\r\n  exact p,"
     },
     {
       "lean": "lemma and_trans (P Q R : Prop) : P ∧ Q → Q ∧ R → P ∧ R :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intro pEq,\r\nintro qEr,\r\ncases pEq with p q,\r\ncases qEr with q r,\r\nsplit, \r\n  -- parte p\r\n  exact p,\r\n\r\n  -- parte r,\r\n  exact r,"
     },
     {
       "lean": "lemma iff_trans (P Q R : Prop) : (P ↔ Q) → (Q ↔ R) → (P ↔ R) :=\n",
-      "editorText": "sorry"
+      "editorText": "sorry,"
     },
     {
       "lean": "lemma iff_trans (P Q R : Prop) : (P ↔ Q) → (Q ↔ R) → (P ↔ R) :=\n",
-      "editorText": "sorry"
+      "editorText": "sorry,"
     },
     {
       "lean": "example (P Q : Prop) : Q → (P ∨ Q) :=\n",
