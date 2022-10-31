@@ -344,19 +344,22 @@
     },
     {
       "lean": "theorem mul_pos (a b : mynat) : a ≠ 0 → b ≠ 0 → a * b ≠ 0 :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intro a_dif_zero,\r\nintro b_dif_zero,\r\nintro n,\r\ncases b with c,\r\n  -- b = 0\r\n  contradiction,\r\n\r\n  -- b = succ c\r\n  rw mul_succ a c at n,\r\n  have nn: a = 0 := add_left_eq_zero n,\r\n  contradiction,\r\n\r\n"
     },
     {
       "lean": "theorem eq_zero_or_eq_zero_of_mul_eq_zero (a b : mynat) (h : a * b = 0) :\n  a = 0 ∨ b = 0 :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "cases a with c,\r\n  -- a = 0\r\n  rw zero_mul at h,\r\n  left,\r\n  exact h,\r\n\r\n  -- a = succ c\r\n  rw succ_mul c b at h,\r\n  right,\r\n  have b_eq_zero: b = 0 := add_left_eq_zero h,\r\n  exact b_eq_zero,"
     },
     {
       "lean": "theorem mul_eq_zero_iff (a b : mynat): a * b = 0 ↔ a = 0 ∨ b = 0 :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "split,\r\n  -- indo\r\n  exact eq_zero_or_eq_zero_of_mul_eq_zero a b,\r\n\r\n  -- voltando\r\n  intro h,\r\n  cases h with a_eq_zero b_eq_zero,\r\n    -- caso a = 0\r\n    rw a_eq_zero,\r\n    rw zero_mul b,\r\n    refl,\r\n\r\n    -- caso b = 0\r\n    rw b_eq_zero,\r\n    rw mul_zero a,\r\n    refl,"
     },
     {
       "lean": "theorem mul_left_cancel (a b c : mynat) (ha : a ≠ 0) : a * b = a * c → b = c :=\n",
-      "editorText": "sorry"
+      "editorText": "induction a with d bc,\r\n  -- caso base \r\n  intro h,\r\n  repeat {rw zero_mul at h},\r\n  contradiction,\r\n\r\n  -- passo indutivo\r\n  intro h,\r\n  repeat {rw succ_mul at h},"
     },
     {
       "lean": "lemma one_add_le_self (x : mynat) : x ≤ 1 + x :=\n",
