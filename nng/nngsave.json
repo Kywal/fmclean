@@ -304,35 +304,43 @@
     },
     {
       "lean": "theorem add_left_cancel (t a b : mynat) : t + a = t + b → a = b :=\n",
-      "editorText": "rw add_comm t a,\r\nrw add_comm t b,\r\nexact add_right_cancel a t b,\r\n"
+      "isSolved": true,
+      "editorText": "rw add_comm t a,\r\nrw add_comm t b,\r\nexact add_right_cancel a t b,\r\n\r\n"
     },
     {
       "lean": "theorem add_right_cancel_iff (t a b : mynat) :  a + t = b + t ↔ a = b :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "split,\r\n  -- indo\r\n  exact add_right_cancel a t b,\r\n  -- voltando\r\n  intro h,\r\n  rw h,\r\n  refl,"
     },
     {
       "lean": "lemma eq_zero_of_add_right_eq_self {a b : mynat} : a + b = a → b = 0 :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intro h,\r\napply add_left_cancel,\r\nrw add_zero,\r\nexact h,\r\n"
     },
     {
       "lean": "theorem succ_ne_zero (a : mynat) : succ a ≠ 0 := \n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "symmetry,\r\nexact zero_ne_succ a,"
     },
     {
       "lean": "lemma add_left_eq_zero {{a b : mynat}} (H : a + b = 0) : b = 0 :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "induction a with c bc,\r\n  -- caso base\r\n  rw zero_add b at H,\r\n  exact H,\r\n\r\n  -- passo indutivo\r\n  rw succ_add c b at H,\r\n  have T: succ (c + b) ≠ 0 := succ_ne_zero (c + b),\r\n  contradiction,"
     },
     {
       "lean": "lemma add_right_eq_zero {a b : mynat} : a + b = 0 → a = 0 :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intro h,\r\nrw add_comm a b at h,\r\nhave a_eq_0 : a = 0 := add_left_eq_zero h,\r\nexact a_eq_0,"
     },
     {
       "lean": "theorem add_one_eq_succ (d : mynat) : d + 1 = succ d :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "rw one_eq_succ_zero,\r\nrw add_succ d 0,\r\nrw add_zero d,\r\nrefl,"
     },
     {
       "lean": "lemma ne_succ_self (n : mynat) : n ≠ succ n :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intro h,\r\ninduction n with p bc,\r\n  -- caso base\r\n  apply zero_ne_succ 0,\r\n  exact h,\r\n\r\n  -- passo indutivo  \r\n  have pp: p = succ p := succ_inj h,\r\n  contradiction,"
     },
     {
       "lean": "theorem mul_pos (a b : mynat) : a ≠ 0 → b ≠ 0 → a * b ≠ 0 :=\n",
