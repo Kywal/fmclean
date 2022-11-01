@@ -359,7 +359,8 @@
     },
     {
       "lean": "theorem mul_left_cancel (a b c : mynat) (ha : a ≠ 0) : a * b = a * c → b = c :=\n",
-      "editorText": "induction a with d bc,\r\n  -- caso base \r\n  intro h,\r\n  repeat {rw zero_mul at h},\r\n  contradiction,\r\n\r\n  -- passo indutivo\r\n  intro h,\r\n  repeat {rw succ_mul at h},"
+      "isSolved": true,
+      "editorText": "induction c with d hd generalizing b,\r\n  -- caso base\r\n  intro h,\r\n  rw mul_zero a at h,\r\n  have a_zero_ou_b_zero: a = 0 ∨ b = 0 := eq_zero_or_eq_zero_of_mul_eq_zero a b h,\r\n  cases a_zero_ou_b_zero with a_zero b_zero,\r\n    -- a = 0\r\n    contradiction,\r\n    -- b = 0\r\n    exact b_zero,\r\n\r\n  -- passo indutivo\r\n  intro h_succ_d,\r\n  cases b with f,\r\n    -- b = 0\r\n    rw mul_zero at h_succ_d,\r\n    symmetry at h_succ_d,\r\n    have a_zero_OU_succD_zero: a = 0 ∨ succ d = 0:= eq_zero_or_eq_zero_of_mul_eq_zero a (succ d) h_succ_d,\r\n    cases a_zero_OU_succD_zero with a_zero succd_zero,\r\n      -- a = 0\r\n      contradiction,\r\n      --succ d = 0\r\n      exact succd_zero.symm,\r\n\r\n    -- b = succ f\r\n    rw mul_succ a f at h_succ_d,\r\n    rw mul_succ a d at h_succ_d,\r\n    have finale1: a * f = a * d:= add_right_cancel (a*f) a (a*d) h_succ_d,\r\n    have finale2: f = d:= hd f finale1,\r\n    apply succ_eq_succ_of_eq,\r\n    exact finale2,"
     },
     {
       "lean": "lemma one_add_le_self (x : mynat) : x ≤ 1 + x :=\n",
