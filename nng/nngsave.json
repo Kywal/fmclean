@@ -403,19 +403,22 @@
     },
     {
       "lean": "theorem le_total (a b : mynat) : a ≤ b ∨ b ≤ a :=\n",
-      "editorText": "cases a with cm; cases b with dm,\r\n  -- 0 e 0\r\n  left,\r\n  refl,\r\n\r\n  -- 0 e succ dm\r\n  left,\r\n  exact zero_le (succ dm),\r\n\r\n  -- succ cm e 0\r\n  right,\r\n  exact zero_le (succ cm),\r\n\r\n  -- succ cm e succ dm\r\n  left,\r\n  cases cm with e he,\r\n    -- cm = 0\r\n    apply succ_le_succ,\r\n    exact zero_le dm,\r\n\r\n    -- cm = succ e\r\n    apply succ_le_succ,\r\n    use dm,\r\n  \r\n  \r\n\r\n"
+      "isSolved": true,
+      "editorText": "induction b with c bc,\r\n  -- caso base\r\n  right,\r\n  exact zero_le a,\r\n\r\n  -- passo indutivo\r\n  cases bc with a_leq_c c_leq_a,\r\n    -- caso a <= c\r\n    left,\r\n    exact le_succ a c a_leq_c,\r\n    -- caso c <= a\r\n    cases c_leq_a with d hd,\r\n    cases d with f,\r\n      -- d = 0\r\n      rw add_zero c at hd,\r\n      left,\r\n      apply le_succ,\r\n      use 0,\r\n      rw add_zero a,\r\n      symmetry,\r\n      exact hd,\r\n\r\n      -- d = succ f\r\n      rw add_succ c f at hd,\r\n      rw add_comm c f at hd,\r\n      rw ← add_succ at hd,\r\n      rw add_comm f (succ c) at hd,\r\n      right,\r\n      use f,\r\n      exact hd,"
     },
     {
       "lean": "lemma le_succ_self (a : mynat) : a ≤ succ a :=\n",
-      "editorText": ""
+      "isSolved": true,
+      "editorText": "rw ← add_one_eq_succ,\r\nuse 1,\r\nrefl,"
     },
     {
       "lean": "theorem add_le_add_right {a b : mynat} : a ≤ b → ∀ t, (a + t) ≤ (b + t) :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intro h,\r\nintro t,\r\ncases h with c hc,\r\ncases c with d,\r\n  -- c = 0\r\n  rw add_zero a at hc,\r\n  rw ← hc,\r\n  exact le_refl (b + t),\r\n\r\n  -- c = succ d\r\n  use succ d,\r\n  rw add_comm a t,\r\n  rw add_assoc t a,\r\n  rw ← hc,\r\n  simp,\r\n  "
     },
     {
       "lean": "theorem le_of_succ_le_succ (a b : mynat) : succ a ≤ succ b → a ≤ b :=\n",
-      "editorText": "sorry"
+      "editorText": "intro h,\r\nrw add_one_eq_succ at h,"
     },
     {
       "lean": "theorem not_succ_le_self (a : mynat) : ¬ (succ a ≤ a) :=\n",
