@@ -418,27 +418,33 @@
     },
     {
       "lean": "theorem le_of_succ_le_succ (a b : mynat) : succ a ≤ succ b → a ≤ b :=\n",
-      "editorText": "intro h,\r\nrw add_one_eq_succ at h,"
+      "isSolved": true,
+      "editorText": "intro h,\r\ncases a with c,\r\n  -- caso a = 0\r\n  exact zero_le b,\r\n\r\n  -- caso a = succ c\r\n  cases h with d hd,\r\n  rw succ_add (succ c) d at hd,\r\n  use d,\r\n  apply add_right_cancel b 1 (succ c + d),\r\n  rw add_one_eq_succ b,\r\n  rw add_one_eq_succ,\r\n  exact hd,"
     },
     {
       "lean": "theorem not_succ_le_self (a : mynat) : ¬ (succ a ≤ a) :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intro h,\r\ncases h with b hb,\r\nrw succ_add a b at hb,\r\nrw ← add_succ at hb,\r\nsymmetry at hb,\r\nhave nhb: succ b = 0:= eq_zero_of_add_right_eq_self hb,\r\ncontradiction,"
     },
     {
       "lean": "theorem add_le_add_left {a b : mynat} (h : a ≤ b) (t : mynat) :\n  t + a ≤ t + b :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "rw add_comm t a,\r\nrw add_comm t b,\r\nrevert t,\r\nexact add_le_add_right h,"
     },
     {
       "lean": "lemma lt_aux_one (a b : mynat) : a ≤ b ∧ ¬ (b ≤ a) → succ a ≤ b :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intro h,\r\ncases h with a_leq_b n_b_leq_a,\r\ncases a_leq_b with d hd,\r\ncases d with c,\r\n  -- d = 0\r\n  rw add_zero a at hd,\r\n  rw ← add_zero b at hd,\r\n  have b_leq_a: b ≤ a,\r\n    use 0,\r\n    exact hd.symm,\r\n  contradiction,\r\n\r\n  -- d = succ c\r\n  use c,\r\n  rw add_succ a c at hd,\r\n  rw ← succ_add a c at hd,\r\n  exact hd,\r\n"
     },
     {
       "lean": "lemma lt_aux_two (a b : mynat) : succ a ≤ b → a ≤ b ∧ ¬ (b ≤ a) :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "intro h,\r\nsplit,\r\n  -- parte a <= b\r\n  cases h with c hc,\r\n  use succ c,\r\n  rw add_succ a c,\r\n  rw ← succ_add a c,\r\n  exact hc,\r\n\r\n  -- parte b <= a\r\n  intro h2,\r\n  cases h with c hc,\r\n  cases h2 with d hd,\r\n  rw hc at hd,\r\n  rw succ_add a c at hd,\r\n  rw ← add_succ a c at hd,\r\n  rw add_assoc a (succ c) at hd,\r\n  rw succ_add c d at hd,\r\n  have nhd: succ(c + d) = 0:= eq_zero_of_add_right_eq_self hd.symm,\r\n  apply succ_ne_zero (c + d),\r\n  exact nhd,\r\n  "
     },
     {
       "lean": "lemma lt_iff_succ_le (a b : mynat) : a < b ↔ succ a ≤ b :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "split,\r\n  -- indo\r\n    exact lt_aux_one a b,\r\n\r\n  -- voltando\r\n    exact lt_aux_two a b,   "
     }
   ]
 }
