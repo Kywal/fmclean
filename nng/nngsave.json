@@ -3,6 +3,8 @@
   "version": "1.3.3",
   "data": [
     {
+    },
+    {
       "lean": "lemma example1 (x y z : mynat) : x * y + z = x * y + z :=\n",
       "isSolved": true,
       "editorText": "refl,"
