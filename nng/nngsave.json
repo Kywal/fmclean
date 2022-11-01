@@ -383,27 +383,31 @@
     },
     {
       "lean": "theorem le_trans (a b c : mynat) (hab : a ≤ b) (hbc : b ≤ c) : a ≤ c :=\n",
-      "editorText": ""
+      "isSolved": true,
+      "editorText": "cases hab with d h1,\r\ncases hbc with e h2,\r\nrw h2,\r\nrw h1,\r\nrw add_assoc a d,\r\nuse d+e,\r\nrefl,"
     },
     {
       "lean": "theorem le_antisymm (a b : mynat) (hab : a ≤ b) (hba : b ≤ a) : a = b :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "cases hab with c h1,\r\ncases hba with d h2,\r\nrw h2,\r\nrw h1,\r\nrw h1 at h2,\r\nrw add_assoc a c at h2,\r\nsymmetry at h2,\r\nhave h3 : (c + d) = 0 := eq_zero_of_add_right_eq_self h2,\r\nrw add_assoc a c,\r\nhave h4 : c = 0 := add_right_eq_zero h3,\r\nrw h3,\r\nrw h4,\r\nrefl,"
     },
     {
       "lean": "lemma le_zero (a : mynat) (h : a ≤ 0) : a = 0 :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "cases h with b hb,\r\nsymmetry at hb,\r\nhave h2 := add_right_eq_zero hb,\r\nexact h2,"
     },
     {
       "lean": "lemma succ_le_succ (a b : mynat) (h : a ≤ b) : succ a ≤ succ b :=\n",
-      "editorText": "sorry"
+      "isSolved": true,
+      "editorText": "cases h with c hc,\r\nrw hc,\r\nuse c,\r\nrw succ_add a c,\r\nrefl,"
     },
     {
       "lean": "theorem le_total (a b : mynat) : a ≤ b ∨ b ≤ a :=\n",
-      "editorText": "sorry"
+      "editorText": "cases a with cm; cases b with dm,\r\n  -- 0 e 0\r\n  left,\r\n  refl,\r\n\r\n  -- 0 e succ dm\r\n  left,\r\n  exact zero_le (succ dm),\r\n\r\n  -- succ cm e 0\r\n  right,\r\n  exact zero_le (succ cm),\r\n\r\n  -- succ cm e succ dm\r\n  left,\r\n  cases cm with e he,\r\n    -- cm = 0\r\n    apply succ_le_succ,\r\n    exact zero_le dm,\r\n\r\n    -- cm = succ e\r\n    apply succ_le_succ,\r\n    use dm,\r\n  \r\n  \r\n\r\n"
     },
     {
       "lean": "lemma le_succ_self (a : mynat) : a ≤ succ a :=\n",
-      "editorText": "sorry"
+      "editorText": ""
     },
     {
       "lean": "theorem add_le_add_right {a b : mynat} : a ≤ b → ∀ t, (a + t) ≤ (b + t) :=\n",
